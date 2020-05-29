@@ -1,4 +1,3 @@
-
 package modelo;
 
 import excepciones.ArcoNoExistenteExcepcion;
@@ -15,15 +14,19 @@ import java.util.ArrayList;
 public class GrafoMatriz extends Grafo{
     int numVerts;
     static final int maxVerts = 20;            
-    Vertice [] verts;
-    int [][] matAd;
+    ArrayList<Vertice> verts;
+    ArrayList<ArrayList<Integer>> matAd;
     
     public GrafoMatriz(int mx){
-        matAd = new int [mx][mx];
-        verts = new Vertice[mx];
-        for (int i = 0; i < mx; i++)
-            for (int j = 0; i < mx; i++)   //¿es i lo que debe sumar o j?
-                matAd[i][j] = 0;    
+        matAd = new ArrayList<ArrayList<Integer>>();
+        verts = new ArrayList<Vertice>();
+        for (int i = 0; i < mx; i++) {
+            ArrayList<Integer> fila = new ArrayList<Integer>();
+            matAd.add(fila);
+            for (int j = 0; j < mx; j++) {
+                matAd.get(i).add(0);
+            }
+        }
         numVerts = 0;       //¿va dentro del for o fuera?
     }
     
@@ -35,20 +38,26 @@ public class GrafoMatriz extends Grafo{
         return numVerts;    
     }
     
-    public Vertice[] vertices(){
+    public ArrayList<Vertice> vertices(){
         return verts;    
     }
     
-    public int[][] getMatriz(){
+    public ArrayList<ArrayList<Integer>> getMatriz(){
         return matAd;
     }
+
+    /*
+    public void setMatAd(int[][] matAd) {
+        this.matAd = matAd;
+    }
+    */
     
     int numVertice(String vs) {
         Vertice v = new Vertice(vs);
         boolean encontrado = false;
         int i = 0;
         for (; (i < numVerts) && !encontrado;){
-            encontrado = verts[i].equals(v);
+            encontrado = verts.get(i).equals(v);
             if (!encontrado){
                 i++;
             } 
@@ -56,11 +65,11 @@ public class GrafoMatriz extends Grafo{
         return (i < numVerts) ? i : -1 ;
     }
     
-    public void printMatAd( int mat[][], int n ){
-        for (int i = 0; i < n; i++) {
+    public void printMatAd( ArrayList<ArrayList<Integer>> arri){
+        for (int i = 0; i < arri.size(); i++) {
             String strMat = " ";
-            for (int j = 0; j < n; j++) {
-                strMat += mat[i][j] + " ";
+            for (int j = 0; j < arri.size(); j++) {
+                strMat += arri.get(i).get(j) + " ";
             }
             System.out.println(strMat);
         }
@@ -75,11 +84,11 @@ public class GrafoMatriz extends Grafo{
         if (va < 0 || vb < 0){
             throw new NodoNoExistenteException("Nodo no existe");
         }
-        if(matAd[va][vb] == 0){
+        if(matAd.get(va).get(vb) == 0){
             throw new ArcoNoExistenteExcepcion("Arco no existe");
         }
         else{
-            matAd[va][vb]=0;
+            matAd.get(va).set(vb, 0);
         }
     }
 
@@ -91,7 +100,7 @@ public class GrafoMatriz extends Grafo{
         if (va < 0 || vb < 0){
             throw new NodoNoExistenteException("Nodo no existe");
         }
-        return matAd[va][vb] == 1;
+        return matAd.get(va).get(vb) == 1;
     }
 
     @Override
@@ -100,7 +109,8 @@ public class GrafoMatriz extends Grafo{
         if (!esta) {
             Vertice v = new Vertice((String) x); 
             v.asigVert(numVerts);
-            verts[numVerts++] = v;
+            verts.add(v);
+            numVerts++;
         }
         else{
             throw new NodoYaExistenteException("El nodo ingresado ya existe");
@@ -109,7 +119,16 @@ public class GrafoMatriz extends Grafo{
 
     @Override
     public void borrarVertice(Object x) throws NodoNoExistenteException{
-        
+        int select = numVertice((String) x);    //obtengo el número del vértice que eliminaré
+        boolean esta = select >= 0;
+        if(!esta){
+            throw new NodoNoExistenteException("Nodo no existe");
+        }
+        verts.remove(select);
+        for (int i = 0; i < matAd.size(); i++) {
+            matAd.get(i).remove(select);
+        }
+        matAd.remove(select);
     }
 
     @Override
@@ -120,7 +139,8 @@ public class GrafoMatriz extends Grafo{
         if (va < 0 || vb < 0){
             throw new NodoNoExistenteException ("Nodo no existe");
         }
-        matAd[va][vb] = 1;
+        matAd.get(va).set(vb, 1);
+        matAd.get(vb).set(va, 1);
     }
 
     @Override
@@ -146,7 +166,7 @@ public class GrafoMatriz extends Grafo{
         boolean procesado=false;
         String vertisProces = "";
         
-        porProcesar.insert(this.verts[index]);
+        porProcesar.insert(this.verts.get(index));
         
         while (procesados.size() != this.numVerts) {
             System.out.println("Nodo actual: " + porProcesar.front().nombre);
@@ -162,12 +182,12 @@ public class GrafoMatriz extends Grafo{
             for(int i=0; i<this.numVerts; i++){
                 procesado=false;
                 for(int j=0; j<procesados.size(); j++){
-                    if(verts[i] == procesados.get(j)){
+                    if(verts.get(i) == procesados.get(j)){
                         procesado=true;
                     }
                 }
-                if(matAd[porProcesar.front().numVertice][i]==1 && procesado==false){
-                    porProcesar.insert(verts[i]);
+                if(matAd.get(porProcesar.front().numVertice).get(i)==1 && procesado==false){
+                    porProcesar.insert(verts.get(i));
                 }
             }
             procesados.add(porProcesar.front());
