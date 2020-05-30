@@ -10,7 +10,7 @@ import excepciones.ColaVaciaException;
 
 /**
  *
- * @author plupy
+ * @author Daniel J. Pérez
  */
 public class Cola {
     private Vertice[] array = new Vertice[10];

@@ -5,9 +5,11 @@ import excepciones.ColaLlenaException;
 import excepciones.ColaVaciaException;
 import excepciones.NodoNoExistenteException;
 import excepciones.NodoYaExistenteException;
+import excepciones.PilaLlenaException;
+import excepciones.PilaVaciaException;
 
 /**
- * @author plupy
+ * @author Daniel J. Pérez
  */
 public abstract class Grafo {
     
@@ -21,11 +23,11 @@ public abstract class Grafo {
     
     public abstract void union(Object x, Object y) throws NodoNoExistenteException;
     
-    public abstract boolean buscarProfundidad(Object x);
+    public abstract boolean buscarProfundidad(Object x) throws PilaLlenaException, PilaVaciaException;
     
-    public abstract boolean buscarAmplitud(Object x);    
+    public abstract boolean buscarAmplitud(Object x) throws ColaLlenaException, ColaVaciaException;    
     
-    public abstract void recorrerProfundidad();
+    public abstract void recorrerProfundidad() throws PilaLlenaException, PilaVaciaException;
     
     public abstract void recorrerAmplitud() throws ColaLlenaException, ColaVaciaException;
     

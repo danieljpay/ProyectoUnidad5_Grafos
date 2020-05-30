@@ -5,11 +5,13 @@ import excepciones.ColaLlenaException;
 import excepciones.ColaVaciaException;
 import excepciones.NodoNoExistenteException;
 import excepciones.NodoYaExistenteException;
+import excepciones.PilaLlenaException;
+import excepciones.PilaVaciaException;
 import java.util.ArrayList;
 
 /**
  *
- * @author plupy
+ * @author Daniel J. Pérez
  */
 public class GrafoMatriz extends Grafo{
     int numVerts;
@@ -144,18 +146,142 @@ public class GrafoMatriz extends Grafo{
     }
 
     @Override
-    public boolean buscarProfundidad(Object x) {
-        return false;
-    }
-
-    @Override
-    public boolean buscarAmplitud(Object x) {
-        return false;
-    }
-
-    @Override
-    public void recorrerProfundidad() {
+    public boolean buscarProfundidad(Object x) throws PilaLlenaException, PilaVaciaException{
+        String verticeBuscado = (String)x;
+        boolean encontrado = false;
+        Pila porProcesar = new Pila(numVerts);
+        ArrayList<Vertice> procesados = new ArrayList<Vertice>();
+        int index=0;
+        boolean procesado=false;
+        //String vertisProces = "";
+        Vertice verticeActual;
         
+        porProcesar.push(this.verts.get(index));
+        
+        while (procesados.size() != this.numVerts){
+            verticeActual = (Vertice) porProcesar.pop();
+            /*
+            System.out.println("Nodo actual: " + verticeActual.nombre);
+            if (!procesados.isEmpty()) {
+                vertisProces="";
+                for (int p = 0; p < procesados.size(); p++) {
+                    vertisProces += procesados.get(p).nombre + " ";
+                }
+            }
+            System.out.println("Procesados: " + vertisProces);
+            */
+            
+            for(int i=0; i<this.numVerts; i++){
+                procesado=false;
+                for(int j=0; j<procesados.size(); j++){
+                    if(verts.get(i) == procesados.get(j)){
+                        procesado=true;
+                    }
+                }
+                if(matAd.get(verticeActual.numVertice).get(i)==1 && procesado==false){
+                    porProcesar.push(verts.get(i));
+                }
+            }
+            procesados.add(verticeActual);
+            for (int i = 0; i < procesados.size(); i++) {
+                if (verticeBuscado.compareTo(procesados.get(i).nombre) == 0) {
+                    encontrado = true;
+                    return encontrado;
+                }
+            }
+            //porProcesar.pop();
+            index++;
+        }
+        return encontrado;
+    }
+
+    @Override
+    public boolean buscarAmplitud(Object x) throws ColaLlenaException, ColaVaciaException{
+        String verticeBuscado = (String)x;
+        boolean encontrado = false;
+        Cola porProcesar = new Cola();
+        ArrayList<Vertice> procesados = new ArrayList<Vertice>();
+        int index=0;
+        boolean procesado=false;
+        //String vertisProces = "";
+        
+        porProcesar.insert(this.verts.get(index));
+        
+        while (procesados.size() != this.numVerts) {
+            /*
+            System.out.println("Nodo actual: " + porProcesar.front().nombre);
+            if(!procesados.isEmpty()){
+                vertisProces="";
+                for (int p = 0; p < procesados.size(); p++) {
+                    vertisProces += procesados.get(p).nombre + " ";
+                }
+            }
+            System.out.println("Procesados: " + vertisProces);
+            */
+
+            for(int i=0; i<this.numVerts; i++){
+                procesado=false;
+                for(int j=0; j<procesados.size(); j++){
+                    if(verts.get(i) == procesados.get(j)){
+                        procesado=true;
+                    }
+                }
+                if(matAd.get(porProcesar.front().numVertice).get(i)==1 && procesado==false){
+                    porProcesar.insert(verts.get(i));
+                }
+            }
+            
+            procesados.add(porProcesar.front());
+            porProcesar.remove();
+            for (int i = 0; i < procesados.size(); i++) {
+                if (verticeBuscado.compareTo(procesados.get(i).nombre) == 0) {
+                    encontrado = true;
+                    return encontrado;
+                }
+            }
+            index++;
+        }
+        return encontrado;
+    }
+
+    @Override
+    public void recorrerProfundidad() throws PilaLlenaException, PilaVaciaException{
+        Pila porProcesar = new Pila(numVerts);
+        ArrayList<Vertice> procesados = new ArrayList<Vertice>();
+        int index=0;
+        boolean procesado=false;
+        String vertisProces = "";
+        Vertice verticeActual;
+        
+        porProcesar.push(this.verts.get(index));
+        
+        while (procesados.size() != this.numVerts){
+            verticeActual = (Vertice) porProcesar.pop();
+            System.out.println("Nodo actual: " + verticeActual.nombre);
+            if (!procesados.isEmpty()) {
+                vertisProces="";
+                for (int p = 0; p < procesados.size(); p++) {
+                    vertisProces += procesados.get(p).nombre + " ";
+                }
+            }
+            System.out.println("Procesados: " + vertisProces);
+            
+            for(int i=0; i<this.numVerts; i++){
+                procesado=false;
+                for(int j=0; j<procesados.size(); j++){
+                    if(verts.get(i) == procesados.get(j)){
+                        procesado=true;
+                    }
+                }
+                if(matAd.get(verticeActual.numVertice).get(i)==1 && procesado==false){
+                    porProcesar.push(verts.get(i));
+                }
+            }
+            procesados.add(verticeActual);
+            //porProcesar.pop();
+            index++;
+        }
+        System.out.println("\nRecorrido de profundidad listo, todos los vértices han sido procesados :) \n");
     }
 
     @Override
@@ -194,7 +320,6 @@ public class GrafoMatriz extends Grafo{
             porProcesar.remove();
             index++;
         }
-        
-        System.out.println("\nRecorrido de anchura listo, todos los vértices han sido procesados :)");
+        System.out.println("\nRecorrido de anchura listo, todos los vértices han sido procesados :) \n");
     }
 }

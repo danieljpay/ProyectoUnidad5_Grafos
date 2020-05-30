@@ -4,6 +4,8 @@ import excepciones.ColaLlenaException;
 import excepciones.ColaVaciaException;
 import excepciones.NodoNoExistenteException;
 import excepciones.NodoYaExistenteException;
+import excepciones.PilaLlenaException;
+import excepciones.PilaVaciaException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import modelo.GrafoMatriz;
@@ -13,12 +15,13 @@ import modelo.GrafoMatriz;
  */
 public class Main {
     
-    public static void main(String[] args) throws NodoYaExistenteException, NodoNoExistenteException, ColaLlenaException, ColaVaciaException {
+    public static void main(String[] args) throws NodoYaExistenteException, NodoNoExistenteException, ColaLlenaException, ColaVaciaException, PilaLlenaException, PilaVaciaException {
         //vars
         int totalVertices;
         String nom;
         int numArcos;
         int indexVertis;
+        boolean encontrado;
         Scanner entrada = new Scanner(System.in);
         
         //inicio
@@ -50,9 +53,35 @@ public class Main {
         ArrayList<ArrayList<Integer>> Matrix = grafito.getMatriz();
         grafito.printMatAd(Matrix);
         
-        //recorrido de profundidad
+        //recorrido de anchura
         System.out.println("\nRecorrido de anchura: \n");
         grafito.recorrerAmplitud();
+        
+        //busqueda de vertice con recorrido de anchura
+        System.out.println("\n Busquemos un vértice con recorrido de anchura:\nIngresa el nombre del vértice que desea buscar:");
+        nom=entrada.next();
+        encontrado = grafito.buscarAmplitud(nom);
+        if (encontrado) {
+            System.out.println("\nEl vértice fue encontrado :)\n");
+        }
+        else{
+            System.out.println("\nEl vértice no fue encontrado :(\n");
+        }
+        
+        //recorrido de profundidad
+        System.out.println("\nRecorrido de profundidad: \n");
+        grafito.recorrerProfundidad();
+        
+        //busqueda de vertice con recorrido de anchura
+        System.out.println("\n Busquemos un vértice con recorrido de anchura:\nIngresa el nombre del vértice que desea buscar:");
+        nom=entrada.next();
+        encontrado = grafito.buscarProfundidad(nom);
+        if (encontrado) {
+            System.out.println("\nEl vértice fue encontrado :)\n");
+        }
+        else{
+            System.out.println("\nEl vértice no fue encontrado :(\n");
+        }
         
         //borrar un vértice
         System.out.println("Borremos un vértice\nIngresa el nombre del vértice a eliminar:");

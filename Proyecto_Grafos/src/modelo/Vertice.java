@@ -7,7 +7,7 @@ package modelo;
 
 /**
  *
- * @author plupy
+ * @author Daniel J. Pérez
  */
 public class Vertice {
     String nombre;
