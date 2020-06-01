@@ -1,4 +1,4 @@
-package modelo;
+package modelo.grafoMatriz;
 
 import excepciones.ArcoNoExistenteExcepcion;
 import excepciones.ColaLlenaException;
@@ -8,6 +8,8 @@ import excepciones.NodoYaExistenteException;
 import excepciones.PilaLlenaException;
 import excepciones.PilaVaciaException;
 import java.util.ArrayList;
+import modelo.Grafo;
+import modelo.Pila;
 
 /**
  *
@@ -86,16 +88,17 @@ public class GrafoMatriz extends Grafo{
         if (va < 0 || vb < 0){
             throw new NodoNoExistenteException("Nodo no existe");
         }
-        if(matAd.get(va).get(vb) == 0){
-            throw new ArcoNoExistenteExcepcion("Arco no existe");
+        if(adyacente(x, y)){
+            matAd.get(va).set(vb, 0);
+            matAd.get(vb).set(va, 0);
         }
         else{
-            matAd.get(va).set(vb, 0);
+            throw new ArcoNoExistenteExcepcion("Arco no existe");
         }
     }
 
     @Override
-    public boolean Adyacente(Object x, Object y) throws NodoNoExistenteException{
+    public boolean adyacente(Object x, Object y) throws NodoNoExistenteException{
         int va, vb;
         va = numVertice((String) x);
         vb = numVertice((String) y);
@@ -199,7 +202,7 @@ public class GrafoMatriz extends Grafo{
     public boolean buscarAmplitud(Object x) throws ColaLlenaException, ColaVaciaException{
         String verticeBuscado = (String)x;
         boolean encontrado = false;
-        Cola porProcesar = new Cola();
+        ColaMatriz porProcesar = new ColaMatriz();
         ArrayList<Vertice> procesados = new ArrayList<Vertice>();
         int index=0;
         boolean procesado=false;
@@ -286,7 +289,7 @@ public class GrafoMatriz extends Grafo{
 
     @Override
     public void recorrerAmplitud() throws ColaLlenaException, ColaVaciaException{
-        Cola porProcesar = new Cola();
+        ColaMatriz porProcesar = new ColaMatriz();
         ArrayList<Vertice> procesados = new ArrayList<Vertice>();
         int index=0;
         boolean procesado=false;

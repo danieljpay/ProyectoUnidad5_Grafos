@@ -15,7 +15,7 @@ public abstract class Grafo {
     
     public abstract void borrarArco(Object x, Object y) throws ArcoNoExistenteExcepcion, NodoNoExistenteException;
     
-    public abstract boolean Adyacente(Object x, Object y) throws NodoNoExistenteException;
+    public abstract boolean adyacente(Object x, Object y) throws NodoNoExistenteException;
     
     public abstract void nuevoVertice(Object x) throws NodoYaExistenteException;
     

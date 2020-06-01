@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.grafoMatriz;
 
+import modelo.grafoMatriz.Vertice;
 import excepciones.ColaLlenaException;
 import excepciones.ColaVaciaException;
 
@@ -12,11 +13,11 @@ import excepciones.ColaVaciaException;
  *
  * @author Daniel J. Pérez
  */
-public class Cola {
+public class ColaMatriz {
     private Vertice[] array = new Vertice[10];
     private int indicador = -1;
 
-    public Cola() {
+    public ColaMatriz() {
     }
     
     public void insert(Vertice num) throws ColaLlenaException{
