@@ -59,6 +59,14 @@ public class GrafoAdcia extends Grafo{
         }
     }
     
+    public String impresion() {
+        String print = "";
+        for(int i=0; i < tablAdc.size(); i++){
+            print += tablAdc.get(i).nombre + tablAdc.get(i).getLad().toString(tablAdc) + "\n";
+        }
+        return print;
+    }
+    
     //****************************************************métodos abstractos****************************************************
 
     @Override

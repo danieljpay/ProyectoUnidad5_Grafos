@@ -20,8 +20,10 @@ public class GrafoMatriz extends Grafo{
     static final int maxVerts = 20;            
     ArrayList<Vertice> verts;
     ArrayList<ArrayList<Integer>> matAd;
+    int verticesIngresados;
     
     public GrafoMatriz(int mx){
+        verticesIngresados = mx;
         matAd = new ArrayList<ArrayList<Integer>>();
         verts = new ArrayList<Vertice>();
         for (int i = 0; i < mx; i++) {
@@ -48,6 +50,10 @@ public class GrafoMatriz extends Grafo{
     
     public ArrayList<ArrayList<Integer>> getMatriz(){
         return matAd;
+    }
+    
+    public int numVertisIngr(){
+        return verticesIngresados;
     }
 
     /*
@@ -77,6 +83,20 @@ public class GrafoMatriz extends Grafo{
             }
             System.out.println(strMat);
         }
+    }
+    
+    public String impresion( ArrayList<ArrayList<Integer>> arri){
+        String impr="";
+        int indVert= 0;
+        for (int i = 0; i < arri.size(); i++) {
+            String strMat = " ";
+            for (int j = 0; j < arri.size(); j++) {
+                strMat += arri.get(i).get(j) + "\t";
+            }
+            System.out.println(strMat);
+            impr+=vertices().get(i).nomVertice() + "\t" + strMat + "\n";
+        }
+        return impr;
     }
 
     //***************************************************métodos abstractos******************************************************
