@@ -17,7 +17,7 @@ import vista.FrMenu;
 public class Launcher {
     
     public static void main(String[] args) {
-        ControladorGrafoMatriz contrGrafMatr = new ControladorGrafoMatriz(Integer.parseInt(JOptionPane.showInputDialog("Primero ingresa el número total de nodos deseados")));
+        ControladorGrafoMatriz contrGrafMatr = new ControladorGrafoMatriz(Integer.parseInt(JOptionPane.showInputDialog("Primero ingresa el número total de vértices deseados")));
         ControladorGrafoAdcia contrGrafAdcia = new ControladorGrafoAdcia();
         FrMenu menuPrincipal = new FrMenu(contrGrafMatr, contrGrafAdcia);
         menuPrincipal.setVisible(true);

@@ -33,8 +33,9 @@ public class FrMenu extends javax.swing.JFrame {
      */
     public FrMenu(ControladorGrafoMatriz ctrlGM, ControladorGrafoAdcia ctrlGA) {
         initComponents();
+        this.setLocationRelativeTo(null);
         OpcionGrafos.add(rdGrafoMatriz);
-        OpcionGrafos.add(rdGrafoMatriz);
+        OpcionGrafos.add(rdGrafoAdy);
         this.ctrlGM = ctrlGM;
         this.ctrlGA = ctrlGA;
         numVertis = ctrlGM.numeroVertices();
@@ -77,6 +78,8 @@ public class FrMenu extends javax.swing.JFrame {
         btnVisualizarGrafo = new javax.swing.JButton();
         lbNúmeroVertice = new javax.swing.JLabel();
         lbRestantesPorNombrar = new javax.swing.JLabel();
+        lbDisplay = new javax.swing.JLabel();
+        btnAdjacent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,6 +165,16 @@ public class FrMenu extends javax.swing.JFrame {
 
         lbRestantesPorNombrar.setText("   ");
 
+        lbDisplay.setFont(new java.awt.Font("Bookman Old Style", 1, 14)); // NOI18N
+        lbDisplay.setText("Pantalla");
+
+        btnAdjacent.setText("Comprobar si son adyacetes");
+        btnAdjacent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdjacentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,101 +182,108 @@ public class FrMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(rdGrafoMatriz)
-                        .addGap(46, 46, 46)
-                        .addComponent(rdGrafoAdy))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(lbAgregarNodos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(373, 373, 373)
-                        .addComponent(lbTitle)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbRestantesPorNombrar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbDestinoArco)
-                                        .addComponent(jLabel1)
-                                        .addComponent(lbPartidaArco))
-                                    .addGap(188, 188, 188))
-                                .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(rdGrafoMatriz)
+                                .addGap(46, 46, 46)
+                                .addComponent(rdGrafoAdy))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(lbAgregarNodos)))
+                        .addGap(0, 612, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbRestantesPorNombrar)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtDestinoArco)
-                                    .addGap(62, 62, 62)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lbNúmeroVertice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnEliminarArco)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnAgregarArco))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnEliminarVertice)
-                                    .addGap(91, 91, 91)
-                                    .addComponent(btnAgregarVertice))
-                                .addComponent(txtNombreVertice, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtPartidaArco, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnVisualizarGrafo)
-                            .addComponent(lbBusquedas)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2))
-                                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(23, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbDestinoArco)
+                                            .addComponent(jLabel1)
+                                            .addComponent(lbPartidaArco)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(lbNúmeroVertice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(btnEliminarArco)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnAdjacent)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(btnAgregarArco))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(btnEliminarVertice)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btnAgregarVertice))
+                                                .addComponent(txtNombreVertice, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtPartidaArco, javax.swing.GroupLayout.Alignment.LEADING)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnVisualizarGrafo)
+                                    .addComponent(lbBusquedas)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbDisplay))))))
+                .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(409, 409, 409)
+                .addComponent(lbTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbTitle)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lbNúmeroVertice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbRestantesPorNombrar)
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombreVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbDisplay))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(rdGrafoMatriz)
                                     .addComponent(rdGrafoAdy))
                                 .addGap(18, 18, 18)
-                                .addComponent(lbAgregarNodos)
-                                .addGap(21, 21, 21))
-                            .addComponent(lbNúmeroVertice))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbRestantesPorNombrar)
-                        .addGap(9, 9, 9)
-                        .addComponent(txtNombreVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbBusquedas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbAgregarNodos))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lbBusquedas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton1)
+                                    .addComponent(jButton2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -282,7 +302,8 @@ public class FrMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregarArco)
-                            .addComponent(btnEliminarArco)))
+                            .addComponent(btnEliminarArco)
+                            .addComponent(btnAdjacent)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -302,7 +323,7 @@ public class FrMenu extends javax.swing.JFrame {
                 numVertis--;
                 lbRestantesPorNombrar.setText(nombrar + " " + numVertis);
             } catch (NodoYaExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo ya existente");
+                JOptionPane.showMessageDialog(this, "Vértice ya existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else if(rdGrafoAdy.isSelected()){
@@ -312,11 +333,11 @@ public class FrMenu extends javax.swing.JFrame {
                 numVertis--;
                 lbRestantesPorNombrar.setText(nombrar + " " + numVertis);
             } catch (NodoYaExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo ya existente");
+                JOptionPane.showMessageDialog(this, "Vértice ya existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás");
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarVerticeActionPerformed
 
@@ -327,7 +348,7 @@ public class FrMenu extends javax.swing.JFrame {
                 ctrlGM.eliminarVertice(txtNombreVertice.getText());
                 txtNombreVertice.setText("");
             } catch (NodoNoExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo no existente");
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else if(rdGrafoAdy.isSelected()){
@@ -335,11 +356,11 @@ public class FrMenu extends javax.swing.JFrame {
                 ctrlGA.eliminarVertice(txtNombreVertice.getText());
                 txtNombreVertice.setText("");
             } catch (NodoNoExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo no existente");
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás");
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarVerticeActionPerformed
 
@@ -352,7 +373,7 @@ public class FrMenu extends javax.swing.JFrame {
                 txtDestinoArco.setText("");
                 btnVisualizarGrafo.doClick();
             } catch (NodoNoExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo no existente");
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else if(rdGrafoAdy.isSelected()){
@@ -362,11 +383,11 @@ public class FrMenu extends javax.swing.JFrame {
                 txtDestinoArco.setText("");
                 btnVisualizarGrafo.doClick();
             } catch (NodoNoExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo no existente");
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás");
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarArcoActionPerformed
 
@@ -379,9 +400,9 @@ public class FrMenu extends javax.swing.JFrame {
                 txtDestinoArco.setText("");
                 btnVisualizarGrafo.doClick();
             } catch (ArcoNoExistenteExcepcion ex) {
-                JOptionPane.showMessageDialog(this, "Arco no existente");
+                JOptionPane.showMessageDialog(this, "Arco no existente", "Error en arcos", JOptionPane.ERROR_MESSAGE);
             } catch (NodoNoExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo no existente");
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else if(rdGrafoAdy.isSelected()){
@@ -391,13 +412,13 @@ public class FrMenu extends javax.swing.JFrame {
                 txtDestinoArco.setText("");
                 btnVisualizarGrafo.doClick();
             } catch (ArcoNoExistenteExcepcion ex) {
-                JOptionPane.showMessageDialog(this, "Arco no existente");
+                JOptionPane.showMessageDialog(this, "Arco no existente", "Error en arcos", JOptionPane.ERROR_MESSAGE);
             } catch (NodoNoExistenteException ex) {
-                JOptionPane.showMessageDialog(this, "Nodo no existente");
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás");
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarArcoActionPerformed
 
@@ -434,7 +455,7 @@ public class FrMenu extends javax.swing.JFrame {
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás");
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -471,7 +492,7 @@ public class FrMenu extends javax.swing.JFrame {
             }
         }
         else{
-            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás");
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -485,9 +506,40 @@ public class FrMenu extends javax.swing.JFrame {
             txtPantalla.setText(ctrlGA.impresion());
         }
         else{
-            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás");
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnVisualizarGrafoActionPerformed
+
+    private void btnAdjacentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjacentActionPerformed
+        //BtnAdjacent
+        if (rdGrafoMatriz.isSelected()) {
+            try {
+                if (ctrlGM.adyacente(txtPartidaArco.getText(), txtDestinoArco.getText())) {
+                    JOptionPane.showMessageDialog(this, "Son adyacentes");
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "No son adyacentes");
+                }
+            } catch (NodoNoExistenteException ex) {
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(rdGrafoAdy.isSelected()){
+            try {
+                if (ctrlGA.adyacente(txtPartidaArco.getText(), txtDestinoArco.getText())) {
+                    JOptionPane.showMessageDialog(this, "Son adyacentes :)");
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "No son adyacentes :(");
+                }
+            } catch (NodoNoExistenteException ex) {
+                JOptionPane.showMessageDialog(this, "Vértice no existente", "Error en vértices", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Primero selecciona qué tipo grafo usarás", "Error en selección de grafo", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAdjacentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,6 +580,7 @@ public class FrMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup OpcionGrafos;
+    private javax.swing.JButton btnAdjacent;
     private javax.swing.JButton btnAgregarArco;
     private javax.swing.JButton btnAgregarVertice;
     private javax.swing.JButton btnEliminarArco;
@@ -542,6 +595,7 @@ public class FrMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lbAgregarNodos;
     private javax.swing.JLabel lbBusquedas;
     private javax.swing.JLabel lbDestinoArco;
+    private javax.swing.JLabel lbDisplay;
     private javax.swing.JLabel lbNúmeroVertice;
     private javax.swing.JLabel lbPartidaArco;
     private javax.swing.JLabel lbRestantesPorNombrar;

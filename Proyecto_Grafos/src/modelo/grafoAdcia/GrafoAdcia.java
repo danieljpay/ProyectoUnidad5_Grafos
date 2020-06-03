@@ -235,6 +235,7 @@ public class GrafoAdcia extends Grafo{
         porProcesar.insert(this.tablAdc.get(0));
         
         while (procesados.size() != tablAdc.size()) {
+            /*
             System.out.println("Nodo actual: " + porProcesar.front().nomVertice());
             prosados="";
             if(!procesados.isEmpty()){
@@ -243,7 +244,8 @@ public class GrafoAdcia extends Grafo{
                 }
             }
             System.out.println("Procesados: " + prosados);
-            
+            */
+
             listaAdy = porProcesar.front().lad.getListita();
             for(int i=0; i<listaAdy.size(); i++){
                 procesado=false;
